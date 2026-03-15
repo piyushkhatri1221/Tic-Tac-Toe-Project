@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body
+    {
+        margin: 0px;
+        height: 100vh;
+        background-color: #BBD8B3;
+        margin-top: 10px;
+        text-align: center;
+        background: url(tictactoebck.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    button
+    {
+        height: 100px;
+        width: 100px;
+        border: 1px solid black;
+        cursor: pointer;
+        font-size: 42px;
+        color: #FFFFFF;
+        background-color: #009688;
+        padding: 0;
+        margin: 0;
+        border-radius: 16px;
+        display: flex;  
+        align-items: center; 
+        justify-content: center; 
+        user-select: none; 
+        transition: 0.3 ease;
+    }
+    button:hover
+    {
+        background-color: #00796B;
+        border: 1px solid #9aa2a8;
+    }
+    .container
+    {
+        display: grid;
+        grid-template-columns: repeat(3, 100px); 
+        grid-template-rows: repeat(3, 100px);  
+        gap: 5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    h1,h2
+    {
+        color: #d0def0;
+    }
+    #newgame{
+        height: 50px;
+        width: 100px;
+    }
+    .hide
+    {
+        display: hide;
+    }
+</style>
+<body>
+    <h2>LETS PLAY</h2>
+    <h1>TIC TAC TOE!</h1>
+    <div class="container">
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+    </div>
+    <div class="welcome" style="text-align: center; display: flex; justify-content: center; color: rgb(255, 255, 199); border: 1 px solid black; font-size: 32px;">Welcome To The Game.</div>
+    <script>
+        let a=document.querySelectorAll(".box");
+        let turn0=true;
+        let winpattern=[
+            [0,1,2],
+            [0,3,6],
+            [0,4,8],
+            [1,4,7],
+            [2,5,8],
+            [2,4,6],
+            [0,4,8],
+            [3,4,5],
+            [6,7,8]
+        ];
+        a.forEach((box)=>{
+            box.addEventListener("click",()=>{
+                
+                if(turn0)
+            {
+                box.innerText="X";
+                turn0=false;
+            }else
+            {
+                box.innerText="O";
+                turn0=true;
+            }
+            box.disabled=true;
+            winchecker();
+            })
+        });
+       function winchecker() {
+    for (var pattern of winpattern) {
+        var pos1 = a[pattern[0]].innerText;
+        var pos2 = a[pattern[1]].innerText;
+        var pos3 = a[pattern[2]].innerText;
+
+        if (pos1 !== "" && pos2 !== "" && pos3 !== "") {
+            if (pos1 === pos2 && pos2 === pos3) {
+                // Check which symbol won
+                if (pos1 === "X") {
+                    window.location.replace("winnerX.html"); // X wins
+                } else if (pos1 === "O") {
+                    window.location.replace("winnerO.html"); // O wins
+                }
+            }
+        }
+    }
+}
+        
+    </script>
+</body>
+</html>
